@@ -238,6 +238,7 @@ class ExecuteAsyncScriptTest extends JSCallStackTest {
  * @param {Array.<SeleniumDetectionTest>} detections
  */
 function displayDetectionResult(detections, isPartial=false) {
+    console.log({detections})
     if (detections.length > 0) {
         const status = Document_querySelector.call(document, '#chromedriver-test-container .test-status');
         status.textContent = 'Detected!';
