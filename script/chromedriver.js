@@ -160,7 +160,6 @@ class CDPRuntimeDomainTest extends SeleniumDetectionTest {
     test(window) {
         let stackLookup = false;
         const e = new window.Error();
-        console.log({winError: e})
         // there might be several ways to catch property access from console print functions
         window.Object.defineProperty(e, 'stack', {
             configurable: false,
@@ -171,7 +170,6 @@ class CDPRuntimeDomainTest extends SeleniumDetectionTest {
             }
         });
         // can be bypassed by patching all console print functions
-        console.log({stackLookup})
         window.console.debug(e);
         return stackLookup;
     }
