@@ -57,7 +57,7 @@ class JSCallStackTest extends SeleniumDetectionTest {
     test() {
         if (this._callStack === null) return false;
         for (let i = 1; i < this._callStack.length; i++) {
-            if (this._stackSignatures.some(signature => signature.test(this._callStack[i])))
+            if (this._stackSignatures.some(signature => signature.test(this._callStack[i], 'callstack')))
                 return true;
         }
         return false;
@@ -98,7 +98,8 @@ class JSHookTest extends JSCallStackTest {
  */
 class WindowConstructorAliasTest extends SeleniumDetectionTest {
 
-    test(window) {
+    test(window, type) {
+        console.log({testType: type})
         // look for unpatched chromedriver
         for (const prop of window.Object.getOwnPropertyNames(window)) {
             if (/^cdc_[a-zA-Z0-9]{22}_(Array|Promise|Symbol)$/.test(prop)) {
@@ -338,8 +339,8 @@ function displayDetectionResult(detections, isPartial=false) {
         const iframe = document.createElement('iframe')
         iframe.style = 'display: block';
         document.body.appendChild(iframe);
-        const detections = passiveTests.filter(thetest => thetest.test(window));
-        detections.push(...iframePassiveTests.filter(thetest => thetest.test(iframe.contentWindow)));
+        const detections = passiveTests.filter(thetest => thetest.test(window, 'passiveTest'));
+        detections.push(...iframePassiveTests.filter(thetest => thetest.test(iframe.contentWindow, 'iFramePassiveTest')));
         console.log({DOMContentLoaded: detections})
         displayDetectionResult(detections, true);
         Document_querySelector.call(document, '#chromedriver-test').onclick = function() {
