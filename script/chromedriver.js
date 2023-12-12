@@ -340,6 +340,7 @@ function displayDetectionResult(detections, isPartial=false) {
         document.body.appendChild(iframe);
         const detections = passiveTests.filter(thetest => thetest.test(window));
         detections.push(...iframePassiveTests.filter(thetest => thetest.test(iframe.contentWindow)));
+        console.log({DOMContentLoaded: detections})
         displayDetectionResult(detections, true);
         Document_querySelector.call(document, '#chromedriver-test').onclick = function() {
             const filledToken = Document_querySelector.call(document, '#chromedriver-token');
