@@ -118,6 +118,7 @@ class WindowConstructorAliasTest extends SeleniumDetectionTest {
                     console.log({continue: prop})
                     continue ///TODO here is detected the browser
                 };
+                // Check if the current property holds a reference to the specified constructor
                 if (window[prop] === constructor) {
                     console.log({props: window[prop]})
                     console.log({constructor: constructor})
@@ -351,6 +352,8 @@ function displayDetectionResult(detections, isPartial=false) {
         console.log({contentIframe: iframe.contentWindow})
         detections.push(...iframePassiveTests.filter(thetest => thetest.test(iframe.contentWindow, 'iFramePassiveTest')));
         console.log({DOMContentLoaded: detections})
+        console.log({IsGlobalWindowEqualToIframeContentWindow: window === iframe.contentWindow})
+        console.log({IsGlobalWindowEqualToWindow: window === window})
         displayDetectionResult(detections, true);
         Document_querySelector.call(document, '#chromedriver-test').onclick = function() {
             const filledToken = Document_querySelector.call(document, '#chromedriver-token');
