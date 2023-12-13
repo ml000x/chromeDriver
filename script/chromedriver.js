@@ -171,7 +171,7 @@ class CDPRuntimeDomainTest extends SeleniumDetectionTest {
         let stackLookup = false;
         const e = new window.Error();
         // there might be several ways to catch property access from console print functions
-        window.Object.defineProperty(e, 'stack', {
+        window.Object.defineProperty(e, 'stack', { //defining stack property on e object and assign it empty value
             configurable: false,
             enumerable: false,
             get: function() {
@@ -180,7 +180,9 @@ class CDPRuntimeDomainTest extends SeleniumDetectionTest {
             }
         });
         // can be bypassed by patching all console print functions
-        window.console.debug(e);
+        sameOrigin();
+        // console.log({stackORError: e.stack}) //always return blocked because websites understand that Chrome DevTolls is open and we were able to run console.log.
+        window.console.debug(e);//is executed, it attempts to log the e object // when DevTools is opened this function will execute and web sites will detect it.
         return stackLookup;
     }
 
@@ -279,8 +281,26 @@ function displayDetectionResult(detections, isPartial=false) {
     }
 }
 
+function sameOrigin() {
+    const expectedOrigin = "https://nowsecure.nl";
+    console.log({expectedOrigin})
+
+    const iframes = Array.from(document.querySelectorAll("iframe"));
+
+    window.addEventListener("DOMContentLoaded", (e) => {
+        if (e.origin !== expectedOrigin) return;
+
+        const sourceIframe = iframes.find(
+            (iframe) => iframe.contentWindow === e.source,
+        );
+
+        console.log({sourceIframe});
+    });
+}
+
 
 (function() {
+
     const executeScriptTest = new ExecuteScriptTest(
         window,
         'execute-script',
@@ -349,11 +369,8 @@ function displayDetectionResult(detections, isPartial=false) {
         iframe.style = 'display: none';
         document.body.appendChild(iframe);
         const detections = passiveTests.filter(thetest => thetest.test(window, 'passiveTest'));
-        console.log({contentIframe: iframe.contentWindow})
         detections.push(...iframePassiveTests.filter(thetest => thetest.test(iframe.contentWindow, 'iFramePassiveTest')));
         console.log({DOMContentLoaded: detections})
-        console.log({IsGlobalWindowEqualToIframeContentWindow: window === iframe.contentWindow})
-        console.log({IsGlobalWindowEqualToWindow: window === window})
         displayDetectionResult(detections, true);
         Document_querySelector.call(document, '#chromedriver-test').onclick = function() {
             const filledToken = Document_querySelector.call(document, '#chromedriver-token');
