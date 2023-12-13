@@ -111,9 +111,18 @@ class WindowConstructorAliasTest extends SeleniumDetectionTest {
         // look for renamed cdc vars, here we expect to find 3 props which have same value of
         // window.Array, window.Promise and window.Symbol.
         function hasConstructorAlias(window, constructor) {
+            console.log({hasConstructorAlias: window})
+            console.log({hasConstructorAliasConstructor: constructor})
             for (const prop of window.Object.getOwnPropertyNames(window)) {
-                if (prop == constructor.name || prop == 'token' || prop == 'getAsyncToken') continue;
-                if (window[prop] === constructor) return true;
+                if (prop == constructor.name || prop == 'token' || prop == 'getAsyncToken') {
+                    console.log({continue: prop})
+                    continue ///TODO here is detected the browser
+                };
+                if (window[prop] === constructor) {
+                    console.log({props: window[prop]})
+                    console.log({constructor: constructor})
+                    return true
+                };
             }
             return false;
         }
@@ -335,7 +344,7 @@ function displayDetectionResult(detections, isPartial=false) {
     ]
     window.addEventListener('DOMContentLoaded', function() {
         const iframe = document.createElement('iframe')
-        iframe.style = 'display: block';
+        iframe.style = 'display: none';
         document.body.appendChild(iframe);
         const detections = passiveTests.filter(thetest => thetest.test(window, 'passiveTest'));
         detections.push(...iframePassiveTests.filter(thetest => thetest.test(iframe.contentWindow, 'iFramePassiveTest')));
