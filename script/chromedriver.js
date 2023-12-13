@@ -344,9 +344,11 @@ function displayDetectionResult(detections, isPartial=false) {
     ]
     window.addEventListener('DOMContentLoaded', function() {
         const iframe = document.createElement('iframe')
+        iframe.id = "testIframe";
         iframe.style = 'display: none';
         document.body.appendChild(iframe);
         const detections = passiveTests.filter(thetest => thetest.test(window, 'passiveTest'));
+        console.log({contentIframe: iframe.contentWindow})
         detections.push(...iframePassiveTests.filter(thetest => thetest.test(iframe.contentWindow, 'iFramePassiveTest')));
         console.log({DOMContentLoaded: detections})
         displayDetectionResult(detections, true);
