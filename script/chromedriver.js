@@ -111,11 +111,10 @@ class WindowConstructorAliasTest extends SeleniumDetectionTest {
         // look for renamed cdc vars, here we expect to find 3 props which have same value of
         // window.Array, window.Promise and window.Symbol.
         function hasConstructorAlias(window, constructor) {
-            console.log({hasConstructorAlias: window})
             console.log({hasConstructorAliasConstructor: constructor})
             for (const prop of window.Object.getOwnPropertyNames(window)) {
+                console.log({prop})
                 if (prop == constructor.name || prop == 'token' || prop == 'getAsyncToken') {
-                    console.log({continue: prop})
                     continue ///TODO here is detected the browser
                 };
                 // Check if the current property holds a reference to the specified constructor
@@ -282,20 +281,20 @@ function displayDetectionResult(detections, isPartial=false) {
 }
 
 function sameOrigin() {
-    const expectedOrigin = "https://nowsecure.nl";
-    console.log({expectedOrigin})
+    var paragraph = document.createElement("p");
+    var pre = document.createElement("pre");
 
-    const iframes = Array.from(document.querySelectorAll("iframe"));
+// Set the text content of the paragraph
+    paragraph.textContent = "This is a green paragraph.";
 
-    window.addEventListener("DOMContentLoaded", (e) => {
-        if (e.origin !== expectedOrigin) return;
-
-        const sourceIframe = iframes.find(
-            (iframe) => iframe.contentWindow === e.source,
-        );
-
-        console.log({sourceIframe});
-    });
+// Set the color of the paragraph to green
+    paragraph.style.color = "green";
+    pre.style.color = "red";
+    paragraph.textContent = navigator.webdriver + window.Object.getOwnPropertyNames(window).length
+    pre.textContent = JSON.stringify(window.Object.getOwnPropertyNames(window))
+// Append the paragraph to the body of the document
+    document.body.appendChild(paragraph);
+    document.body.appendChild(pre);
 }
 
 
