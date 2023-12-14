@@ -124,7 +124,11 @@ class WindowConstructorAliasTest extends SeleniumDetectionTest {
             }
             return false;
         }
-
+        console.table([
+            ["Array", hasConstructorAlias(window, window.Array)]
+            ["Symbol", hasConstructorAlias(window, window.Symbol)]
+            ["Promise", hasConstructorAlias(window, window.Promise)]
+        ])
         console.log("%c window.Array has hasConstructorAlias " + hasConstructorAlias(window, window.Array), 'color: yellow')
         console.log("%c window.Symbol has hasConstructorAlias " + hasConstructorAlias(window, window.Symbol), 'color: yellow')
         console.log("%c window.Promise has hasConstructorAlias " + hasConstructorAlias(window, window.Promise), 'color: yellow')
