@@ -111,7 +111,6 @@ class WindowConstructorAliasTest extends SeleniumDetectionTest {
         // look for renamed cdc vars, here we expect to find 3 props which have same value of
         // window.Array, window.Promise and window.Symbol.
         function hasConstructorAlias(window, constructor) {
-            console.log({hasConstructorAliasConstructor: constructor})
             for (const prop of window.Object.getOwnPropertyNames(window)) {
                 if (prop == constructor.name || prop == 'token' || prop == 'getAsyncToken') {
                     console.log("We do not checking  " + prop + "  property")
@@ -368,8 +367,8 @@ function sameOrigin() {
         iframe.style = 'display: none';
         document.body.appendChild(iframe);
         const detections = passiveTests.filter(thetest => thetest.test(window, 'passiveTest'));
+        console.log("check if window global object is equal to iframe.contentWindow " + iframe.contentWindow === window)
         detections.push(...iframePassiveTests.filter(thetest => thetest.test(iframe.contentWindow, 'iFramePassiveTest')));
-        console.log({DOMContentLoaded: detections})
         displayDetectionResult(detections, true);
         Document_querySelector.call(document, '#chromedriver-test').onclick = function() {
             const filledToken = Document_querySelector.call(document, '#chromedriver-token');
