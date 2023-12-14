@@ -121,10 +121,13 @@ class WindowConstructorAliasTest extends SeleniumDetectionTest {
                     console.log("%c " + window[prop] + " property has reference to " + constructor, 'background: #222; color: green')
                     return true
                 };
-                console.log("%c " + window[prop] + " property hasn't reference to " + constructor, 'background: #222; color: red')
             }
             return false;
         }
+
+        console.log("%c window.Array has hasConstructorAlias " + hasConstructorAlias(window, window.Array), 'color: yellow')
+        console.log("%c window.Symbol has hasConstructorAlias " + hasConstructorAlias(window, window.Symbol), 'color: yellow')
+        console.log("%c window.Promise has hasConstructorAlias " + hasConstructorAlias(window, window.Promise), 'color: yellow')
         return hasConstructorAlias(window, window.Array) &&
             hasConstructorAlias(window, window.Promise) &&
             hasConstructorAlias(window, window.Symbol);
