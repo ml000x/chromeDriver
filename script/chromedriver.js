@@ -369,6 +369,7 @@ function sameOrigin() {
         )
     ]
     window.addEventListener('DOMContentLoaded', function() {
+        console.log("%c triggering DOMContentLoaded event", 'color:aqua')
         const iframe = document.createElement('iframe')
         iframe.id = "testIframe";
         iframe.style = 'display: none';
