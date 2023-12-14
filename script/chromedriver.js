@@ -113,16 +113,16 @@ class WindowConstructorAliasTest extends SeleniumDetectionTest {
         function hasConstructorAlias(window, constructor) {
             console.log({hasConstructorAliasConstructor: constructor})
             for (const prop of window.Object.getOwnPropertyNames(window)) {
-                console.log({prop})
                 if (prop == constructor.name || prop == 'token' || prop == 'getAsyncToken') {
+                    console.log("We do not checking  " + prop + "  property")
                     continue ///TODO here is detected the browser
                 };
                 // Check if the current property holds a reference to the specified constructor
                 if (window[prop] === constructor) {
-                    console.log({props: window[prop]})
-                    console.log({constructor: constructor})
+                    console.log(window[prop] + " property has reference to " + constructor)
                     return true
                 };
+                console.log(window[prop] + " property hasn't reference to " + constructor)
             }
             return false;
         }
