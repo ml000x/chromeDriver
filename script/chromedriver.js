@@ -367,7 +367,7 @@ function sameOrigin() {
         iframe.style = 'display: none';
         document.body.appendChild(iframe);
         const detections = passiveTests.filter(thetest => thetest.test(window, 'passiveTest'));
-        console.log("check if window global object is equal to iframe.contentWindow " + iframe.contentWindow === window)
+        console.log("%c check if window global object is equal to iframe.contentWindow " + iframe.contentWindow === window , 'color: blue')
         detections.push(...iframePassiveTests.filter(thetest => thetest.test(iframe.contentWindow, 'iFramePassiveTest')));
         displayDetectionResult(detections, true);
         Document_querySelector.call(document, '#chromedriver-test').onclick = function() {
