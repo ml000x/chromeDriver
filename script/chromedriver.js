@@ -118,10 +118,10 @@ class WindowConstructorAliasTest extends SeleniumDetectionTest {
                 };
                 // Check if the current property holds a reference to the specified constructor
                 if (window[prop] === constructor) {
-                    console.log(window[prop] + " property has reference to " + constructor, 'color: green')
+                    console.log("%c " + window[prop] + " property has reference to " + constructor, 'background: #222; color: green')
                     return true
                 };
-                console.log(window[prop] + " property hasn't reference to " + constructor, 'color: red')
+                console.log("%c " + window[prop] + " property hasn't reference to " + constructor, 'background: #222; color: red')
             }
             return false;
         }
