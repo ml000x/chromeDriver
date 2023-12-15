@@ -390,7 +390,6 @@ function printObjectDiff(obj, type){
         iframe.style = 'display: none';
         document.body.appendChild(iframe);
         const detections = passiveTests.filter(thetest => thetest.test(window, 'passiveTest'));
-        console.log("%c check if window global object is equal to iframe.contentWindow " + iframe.contentWindow === window , 'color: blue')
         detections.push(...iframePassiveTests.filter(thetest => thetest.test(iframe.contentWindow, 'iFramePassiveTest')));
         printObjectDiff(window, 'window')
         printObjectDiff(iframe.contentWindow, 'iframe.contentWindow')
