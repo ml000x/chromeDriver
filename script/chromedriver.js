@@ -186,6 +186,7 @@ class CDPRuntimeDomainTest extends SeleniumDetectionTest {
         // sameOrigin();
         // console.log({stackORError: e.stack}) //always return blocked because websites understand that Chrome DevTolls is open and we were able to run console.log.
         window.console.debug(e);//is executed, it attempts to log the e object // when DevTools is opened this function will execute and web sites will detect it.
+        console.log("$c stopped here window.console.debug(e)" + e , 'color:red')
         return stackLookup;
     }
 
