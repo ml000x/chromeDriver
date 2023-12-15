@@ -115,9 +115,7 @@ class WindowConstructorAliasTest extends SeleniumDetectionTest {
                 };
                 // Check if the current property holds a reference to the specified constructor
                 if (window[prop] === constructor) {
-                    if(type === "iFramePassiveTest") {
                         console.log("%c " + window[prop] + " property has reference to " + constructor, 'background: #222; color: green')
-                    }
                     return true
                 };
             }
@@ -128,9 +126,9 @@ class WindowConstructorAliasTest extends SeleniumDetectionTest {
             ["Symbol", hasConstructorAlias(window, window.Symbol)],
             ["Promise", hasConstructorAlias(window, window.Promise)]
         ])
-        console.log("%c window.Array hasConstructorAlias is " + hasConstructorAlias(window, window.Array), 'color: yellow')
-        console.log("%c window.Symbol hasConstructorAlias is " + hasConstructorAlias(window, window.Symbol), 'color: yellow')
-        console.log("%c window.Promise hasConstructorAlias is " + hasConstructorAlias(window, window.Promise), 'color: yellow')
+        // console.log("%c window.Array hasConstructorAlias is " + hasConstructorAlias(window, window.Array), 'color: yellow')
+        // console.log("%c window.Symbol hasConstructorAlias is " + hasConstructorAlias(window, window.Symbol), 'color: yellow')
+        // console.log("%c window.Promise hasConstructorAlias is " + hasConstructorAlias(window, window.Promise), 'color: yellow')
         return hasConstructorAlias(window, window.Array) &&
             hasConstructorAlias(window, window.Promise) &&
             hasConstructorAlias(window, window.Symbol);
