@@ -310,7 +310,7 @@ function printObjectDiff(obj, type){
     infoText.propertyLength = obj.length;
     infoText.windowLength = window.length;
     window.someText = "need to check if this native window property has reference with obj";
-    infoText.objSomeText = obj.someText;
+    infoText.objSomeText = obj.someText ?? "not defined";
     infoText.unReferencedProperties = window.Object.getOwnPropertyNames(window).filter(win => !obj.hasOwnProperty(win))
     info.textContent = JSON.stringify(infoText);
     document.body.appendChild(info);
