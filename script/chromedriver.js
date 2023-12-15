@@ -310,7 +310,6 @@ function printObjectDiff(obj, type){
     infoText.propertyLength = window.Object.getOwnPropertyNames(obj).length;
     infoText.windowLength = window.Object.getOwnPropertyNames(window).length;
     infoText.unRefPropsValues = JSON.stringify({
-        "0": obj["0"],
         sameOrigin: obj.sameOrigin,
         token: obj.token,
     })
