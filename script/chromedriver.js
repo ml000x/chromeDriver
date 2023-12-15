@@ -307,8 +307,8 @@ function printObjectDiff(obj, type){
     info.style.color = "green";
     var infoText = {};
     infoText.type= type;
-    infoText.propertyLength = obj.length;
-    infoText.windowLength = window.length;
+    infoText.propertyLength = window.Object.getOwnPropertyNames(obj).length;
+    infoText.windowLength = window.Object.getOwnPropertyNames(window).length;
     window.someText = "need to check if this native window property has reference with obj";
     infoText.objSomeText = obj.someText ?? "not defined";
     infoText.unReferencedProperties = window.Object.getOwnPropertyNames(window).filter(win => !obj.hasOwnProperty(win))
