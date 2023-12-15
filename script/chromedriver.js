@@ -103,6 +103,7 @@ class WindowConstructorAliasTest extends SeleniumDetectionTest {
         // look for unpatched chromedriver
         for (const prop of window.Object.getOwnPropertyNames(window)) {
             if (/^cdc_[a-zA-Z0-9]{22}_(Array|Promise|Symbol)$/.test(prop)) {
+                console.log("$c stopped here " + prop , 'color:red')
                 return true;
             }
         }
