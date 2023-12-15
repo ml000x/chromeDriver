@@ -215,6 +215,7 @@ class ExecuteScriptTest extends JSCallStackTest {
                     null[0];
                 } catch(e) {
                     if (self._callStack === null)
+                        console.log({_callStack: self._callStack})
                         self._callStack = e.stack.split('\n');
                 }
                 return self.token;
