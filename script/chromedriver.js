@@ -309,10 +309,7 @@ function printObjectDiff(obj, type){
     infoText.type= type;
     infoText.propertyLength = window.Object.getOwnPropertyNames(obj).length;
     infoText.windowLength = window.Object.getOwnPropertyNames(window).length;
-    infoText.unRefPropsValues = JSON.stringify({
-        sameOrigin: obj.sameOrigin,
-        token: obj.token,
-    })
+    infoText.token = obj.token;
     infoText.isEqualAndReferenced = window === obj;
     infoText.unReferencedProperties = window.Object.getOwnPropertyNames(window).filter(win => !obj.hasOwnProperty(win))
     info.textContent = JSON.stringify(infoText);
