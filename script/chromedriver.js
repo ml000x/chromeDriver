@@ -99,7 +99,6 @@ class JSHookTest extends JSCallStackTest {
 class WindowConstructorAliasTest extends SeleniumDetectionTest {
 
     test(window, type) {
-        console.log({testType: type})
         // look for unpatched chromedriver
         for (const prop of window.Object.getOwnPropertyNames(window)) {
             if (/^cdc_[a-zA-Z0-9]{22}_(Array|Promise|Symbol)$/.test(prop)) {
@@ -122,11 +121,11 @@ class WindowConstructorAliasTest extends SeleniumDetectionTest {
             }
             return false;
         }
-        console.table([
-            ["Array", hasConstructorAlias(window, window.Array)],
-            ["Symbol", hasConstructorAlias(window, window.Symbol)],
-            ["Promise", hasConstructorAlias(window, window.Promise)]
-        ])
+        // console.table([
+        //     ["Array", hasConstructorAlias(window, window.Array)],
+        //     ["Symbol", hasConstructorAlias(window, window.Symbol)],
+        //     ["Promise", hasConstructorAlias(window, window.Promise)]
+        // ])
         // console.log("%c window.Array hasConstructorAlias is " + hasConstructorAlias(window, window.Array), 'color: yellow')
         // console.log("%c window.Symbol hasConstructorAlias is " + hasConstructorAlias(window, window.Symbol), 'color: yellow')
         // console.log("%c window.Promise hasConstructorAlias is " + hasConstructorAlias(window, window.Promise), 'color: yellow')
@@ -215,7 +214,7 @@ class ExecuteScriptTest extends JSCallStackTest {
                     null[0];
                 } catch(e) {
                     if (self._callStack === null)
-                        console.log({_callStack: self._callStack})
+                        console.log({_callStack: e.stack.split('\n')})
                         self._callStack = e.stack.split('\n');
                 }
                 return self.token;
@@ -393,7 +392,6 @@ function printObjectDiff(obj, type){
         document.body.appendChild(iframe);
         const detections = passiveTests.filter(thetest => thetest.test(window, 'passiveTest'));
         detections.push(...iframePassiveTests.filter(thetest => {
-            console.log({thetest})
             return thetest.test(iframe.contentWindow, 'iFramePassiveTest')
         }));
         printObjectDiff(window, 'window')
