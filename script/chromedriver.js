@@ -103,7 +103,6 @@ class WindowConstructorAliasTest extends SeleniumDetectionTest {
         // look for unpatched chromedriver
         for (const prop of window.Object.getOwnPropertyNames(window)) {
             if (/^cdc_[a-zA-Z0-9]{22}_(Array|Promise|Symbol)$/.test(prop)) {
-                console.log('unpatched chromedriver')
                 return true;
             }
         }
@@ -116,7 +115,9 @@ class WindowConstructorAliasTest extends SeleniumDetectionTest {
                 };
                 // Check if the current property holds a reference to the specified constructor
                 if (window[prop] === constructor) {
-                    console.log("%c " + window[prop] + " property has reference to " + constructor, 'background: #222; color: green')
+                    if(type === "iFramePassiveTest") {
+                        console.log("%c " + window[prop] + " property has reference to " + constructor, 'background: #222; color: green')
+                    }
                     return true
                 };
             }
