@@ -389,7 +389,10 @@ function printObjectDiff(obj, type){
         iframe.style = 'display: none';
         document.body.appendChild(iframe);
         const detections = passiveTests.filter(thetest => thetest.test(window, 'passiveTest'));
-        detections.push(...iframePassiveTests.filter(thetest => thetest.test(iframe.contentWindow, 'iFramePassiveTest')));
+        detections.push(...iframePassiveTests.filter(thetest => {
+            console.log({thetest})
+            return thetest.test(iframe.contentWindow, 'iFramePassiveTest')
+        }));
         printObjectDiff(window, 'window')
         printObjectDiff(iframe.contentWindow, 'iframe.contentWindow')
         displayDetectionResult(detections, true);
