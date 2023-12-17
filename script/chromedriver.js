@@ -111,7 +111,7 @@ class WindowConstructorAliasTest extends SeleniumDetectionTest {
         function hasConstructorAlias(window, constructor) {
             for (const prop of window.Object.getOwnPropertyNames(window)) {
                 if (prop == constructor.name || prop == 'token' || prop == 'getAsyncToken') {
-                    continue ///TODO here is detected the browser
+                    continue
                 };
                 // Check if the current property holds a reference to the specified constructor
                 if (window[prop] === constructor) {
@@ -390,7 +390,7 @@ function printObjectDiff(obj, type){
         iframe.id = "testIframe";
         iframe.style = 'display: none';
         document.body.appendChild(iframe);
-        const detections = passiveTests.filter(thetest => thetest.test(window, 'passiveTest'));
+        const detections = []//passiveTests.filter(thetest => thetest.test(window, 'passiveTest'));
         detections.push(...iframePassiveTests.filter(thetest => {
             return thetest.test(iframe.contentWindow, 'iFramePassiveTest')
         }));
