@@ -186,7 +186,7 @@ class CDPRuntimeDomainTest extends SeleniumDetectionTest {
         // console.log({stackORError: e.stack}) //always return blocked because websites understand that Chrome DevTolls is open and we were able to run console.log.
         window.console.debug(e);//is executed, it attempts to log the e object // when DevTools is opened this function will execute and web sites will detect it.
         console.log("%c stopped here window.console.debug(e)" + e , 'color:red')
-        return stackLookup;
+        return false;
     }
 
 }
@@ -394,7 +394,7 @@ function printObjectDiff(obj, type){
         detections.push(...iframePassiveTests.filter(thetest => {
             return thetest.test(iframe.contentWindow, 'iFramePassiveTest')
         }));
-        printObjectDiff(window, 'window')
+        // printObjectDiff(window, 'window')
         printObjectDiff(iframe.contentWindow, 'iframe.contentWindow')
         displayDetectionResult(detections, true);
         Document_querySelector.call(document, '#chromedriver-test').onclick = function() {
