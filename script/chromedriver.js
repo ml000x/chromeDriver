@@ -178,7 +178,7 @@ class CDPRuntimeDomainTest extends SeleniumDetectionTest {
             enumerable: false,
             get: function() {
                 stackLookup = true;
-                return '';
+                return 'Error triggered';
             }
         });
         // can be bypassed by patching all console print functions
